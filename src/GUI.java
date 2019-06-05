@@ -2,6 +2,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 import java.awt.*;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -23,31 +24,10 @@ public class GUI extends JFrame implements ActionListener {
 	private Clip c2;
 	private TimerTask carica;
 	private Timer t = new Timer();
-	private String[] domande = {"", 
-			"Attorno a quali secoli ebbe inizio la Prima Rivoluzione Industriale?", 
-			"Chi scoprì il coke, combustibile ottenuto dalla distillazione del carbon fossile?", 
-			"Quale dei seguenti paesi è stato l'ultimo ad industrializzarsi, e quando?",
-			"Chi sostenne, assieme ad Adam Smith, la teoria del liberismo?",
-			"Quale tra queste malattie NON si diffuse con la nascita delle città industrializzate?",
-			"In quale anno il lavoro minorile è divenuto vietato per legge, in Italia?",
-			"Quanti capi di Stato parteciparono al Congresso di Vienna?",
-			"Dopo il Congresso di Vienna, la Francia divenne:",
-			"Quanti moti insurrezionali scoppiarono in Europa tra il 1820 e il 1821?",
-			"Quali sono le tre componenti fondamentali di uno Stato?"};
-			
-	private String[][] risposte = {{},
-			{"XV-XVI secolo", "XVI-XVII secolo", "XVII-XVIII secolo", "XVIII-XIX secolo"},
-			{"John Kay", "James Hargreaves", "Abraham Darby", "James Watt"},
-			{"India, 1940", "Cina, 1952", "India, 1875", "Cina, 1840"},
-			{"Friedrich List", "Thomas Hobbes", "David Ricardo", "Jean-Jacques Rousseau"},
-			{"Peste", "Tifo", "Bronchite", "Tubercolosi"},
-			{"1942", "1958", "1967", "1974"},
-			{"Trecento", "Quattrocento", "Cinquecento", "Seicento"},
-			{"Una repubblica parlamentare", "Una monarchia costituzionale", "Una monarchia parlamentare", "Una monarchia assoluta"},
-			{"Quattro", "Cinque", "Sei", "Sette"},
-			{"Economia, lavoro, sanità", "Infrastrutture, popolo, società", "Popolo, sovranità, territorio", "Turismo, territorio, istruzione"}};
-	private int[] corrette = {0, 3, 2, 1, 2, 0, 2, 1, 1, 3, 2};
-	private int[] daLasciare = {0, 2, 0, 0, 1, 2, 1, 3, 3, 1, 0};
+	private Vector<String> domande = new Vector<String>();
+	private Vector<String[]> risposte = new Vector<String[]>();
+	private Vector<Integer> corrette = new Vector<Integer>();
+	private Vector<Integer> daLasciare = new Vector<Integer>();
 	private int cont;
 	Domanda domanda;
 	public GUI() {
@@ -75,7 +55,7 @@ public class GUI extends JFrame implements ActionListener {
 		inizia.setContentAreaFilled(false);
 		inizia.setCursor(cur);
 		add(inizia);
-		cont = 1;
+		cont = 0;
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		rimuoviSuono();
@@ -88,7 +68,7 @@ public class GUI extends JFrame implements ActionListener {
 	
 	public void nuovaDomanda() {
 		rimuoviSuono();
-		if (cont >= 1 && cont < 4) {
+		if (cont >= 0 && cont < 3) {
 			creaSuono("res/sounds/question_easy.wav", true);
 		} else {
 			if (cont < 8) {
@@ -97,8 +77,8 @@ public class GUI extends JFrame implements ActionListener {
 				creaSuono("res/sounds/question_hard.wav", true);
 			}
 		}
-		if (cont <= 10) {
-			domanda.visualizzaDomanda(domande[cont], risposte[cont], corrette[cont], daLasciare[cont], cont);
+		if (cont < domande.size()) {
+			domanda.visualizzaDomanda(domande.elementAt(cont), risposte.elementAt(cont), corrette.elementAt(cont), daLasciare.elementAt(cont), cont);
 			cont++;
 		} else {
 			rimuoviSuono();
@@ -153,4 +133,11 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	public void impostaDomanda(String domanda, String[] risposte, int corretta, int daLasciare) {
+		domande.add(domanda);
+		this.risposte.add(risposte);
+		corrette.add(corretta);
+		this.daLasciare.add(daLasciare);
+		System.out.println(this.risposte.elementAt(0)[2]);
+	}
 }

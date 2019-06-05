@@ -114,7 +114,7 @@ public class Domanda extends Container implements ActionListener {
 
 	public void visualizzaDomanda(String domanda, String[] risposte, int corretta, int daLasciare, int cont) {
 		info.setVisible(false);
-		info.setIcon(new ImageIcon("res/info/info"+cont+".png"));
+		info.setIcon(new ImageIcon("res/info/info"+(cont+1)+".png"));
 		nDomanda.setText("Domanda n."+cont);
 		verificato = false;
 		avanti.setVisible(false);
