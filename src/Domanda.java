@@ -3,6 +3,7 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.*;
 @SuppressWarnings("serial")
 public class Domanda extends Container implements ActionListener {
@@ -112,17 +113,17 @@ public class Domanda extends Container implements ActionListener {
 		usatoPubblico = false;
 	}
 
-	public void visualizzaDomanda(String domanda, String[] risposte, int corretta, int daLasciare, int cont) {
+	public void visualizzaDomanda(String domanda, Vector<String> risposte, int corretta, int daLasciare, int cont) {
 		info.setVisible(false);
 		info.setIcon(new ImageIcon("res/info/info"+(cont+1)+".png"));
 		nDomanda.setText("Domanda n."+cont);
 		verificato = false;
 		avanti.setVisible(false);
 		this.domanda.setText("<html><body align='center'>"+domanda+"</body></html>");
-		risposta1Txt.setText("        A. "+risposte[0]);
-		risposta2Txt.setText("        B. "+risposte[1]);
-		risposta3Txt.setText("        C. "+risposte[2]);
-		risposta4Txt.setText("        D. "+risposte[3]);
+		risposta1Txt.setText("        A. "+risposte.elementAt(0));
+		risposta2Txt.setText("        B. "+risposte.elementAt(1));
+		risposta3Txt.setText("        C. "+risposte.elementAt(2));
+		risposta4Txt.setText("        D. "+risposte.elementAt(3));
 		for(int i=0; i<4; i++) {
 			this.risposte[i].setEnabled(true);
 			this.risposte[i].setVisible(true);

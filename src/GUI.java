@@ -25,7 +25,7 @@ public class GUI extends JFrame implements ActionListener {
 	private TimerTask carica;
 	private Timer t = new Timer();
 	private Vector<String> domande = new Vector<String>();
-	private Vector<String[]> risposte = new Vector<String[]>();
+	private Vector<Vector<String>> risposte = new Vector<Vector<String>>();
 	private Vector<Integer> corrette = new Vector<Integer>();
 	private Vector<Integer> daLasciare = new Vector<Integer>();
 	private int cont;
@@ -133,11 +133,11 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 	
-	public void impostaDomanda(String domanda, String[] risposte, int corretta, int daLasciare) {
+	public void impostaDomanda(String domanda, Vector<String> risposte, int corretta, int daLasciare) {
 		domande.add(domanda);
 		this.risposte.add(risposte);
 		corrette.add(corretta);
 		this.daLasciare.add(daLasciare);
-		System.out.println(this.risposte.elementAt(0)[2]);
+		System.out.println(this.risposte.elementAt(0).elementAt(2));
 	}
 }
