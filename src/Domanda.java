@@ -116,7 +116,7 @@ public class Domanda extends Container implements ActionListener {
 	public void visualizzaDomanda(String domanda, Vector<String> risposte, int corretta, int daLasciare, int cont) {
 		info.setVisible(false);
 		info.setIcon(new ImageIcon("res/info/info"+(cont+1)+".png"));
-		nDomanda.setText("Domanda n."+cont);
+		nDomanda.setText("Domanda n."+(cont+1));
 		verificato = false;
 		avanti.setVisible(false);
 		this.domanda.setText("<html><body align='center'>"+domanda+"</body></html>");

@@ -1,12 +1,16 @@
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Vector;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		GUI g = new GUI();
 		String temp;
 		String domanda;
@@ -14,24 +18,24 @@ public class Main {
 		int corretta;
 		int daLasciare;
 		int i;
-		try(BufferedReader br = new BufferedReader(new FileReader("domandeRisposte.txt"))) {
-			// Lettura della prima riga
-			temp = br.readLine();
-			// Se non è null (se c'è qualcosa)
+		File fileDir = new File("domandeRisposte.txt");
+		
+		BufferedReader in;
+		try {
+			in = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
+			temp = in.readLine();
 		    while (temp != null) {
 		    	domanda = temp;
 		    	risposte = new Vector<String>();
 		    	for (i=0; i<4; i++) {
-		    		risposte.add(br.readLine());
+		    		risposte.add(in.readLine());
 		    	}
-		       	corretta = Integer.valueOf(br.readLine());
-		       	daLasciare = Integer.valueOf(br.readLine());
+		    	corretta = Integer.valueOf(in.readLine());
+		       	daLasciare = Integer.valueOf(in.readLine());
 		       	g.impostaDomanda(domanda, risposte, corretta, daLasciare);
-		       	temp = br.readLine();
+		       	temp = in.readLine();
 		    }
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
