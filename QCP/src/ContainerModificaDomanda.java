@@ -80,7 +80,7 @@ public class ContainerModificaDomanda extends Container implements ActionListene
 		daLasciareCmb.setBounds(17, 555, 150, 20);
 		add(daLasciareCmb);
 		aggiornaComboBox();
-		daLasciareLbl.setBounds(17, 515, 225, 40);
+		daLasciareLbl.setBounds(17, 515, 235, 40);
 		daLasciareLbl.setHorizontalAlignment(SwingConstants.LEFT);
 		daLasciareLbl.setForeground(Color.WHITE);
 		daLasciareLbl.setFont(domandaLbl.getFont().deriveFont(22f));

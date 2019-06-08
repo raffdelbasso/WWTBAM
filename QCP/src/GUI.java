@@ -16,7 +16,7 @@ import javax.swing.*;
 public class GUI extends JFrame implements ActionListener, WindowListener {
 	private Image icona;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	ImageIcon sfondo = new ImageIcon("res/etc/sfondoPnl.jpg");
+	ImageIcon sfondo = new ImageIcon("res/etc/sfondo.jpg");
 	private Vector<Domanda> domande;
 	private ContainerDomande c;
 	private ContainerModificaDomanda c2;
