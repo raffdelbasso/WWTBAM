@@ -11,9 +11,6 @@ public class Carica extends TimerTask{
 	}
 
 	public void run() {
-		gui.getContentPane().removeAll();
-		gui.setContentPane(new JLabel(new ImageIcon("res/etc/loading.jpg")));
-		gui.getContentPane().revalidate();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

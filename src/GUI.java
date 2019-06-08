@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -12,12 +13,14 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class GUI extends JFrame implements ActionListener {
 	private Image icona;
+	private JLabel testo = new JLabel();
 	private Cursor cur = new Cursor(Cursor.HAND_CURSOR);
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	ImageIcon sfondo = new ImageIcon("res/etc/sfondo.jpg");
 	ImageIcon sfondo2 = new ImageIcon("res/etc/sfondo2.jpg");
 	private ImageIcon sfondo3 = new ImageIcon("res/etc/sfondo3.jpg");
 	private JButton inizia = new JButton(new ImageIcon("res/etc/inizia.png"));
+	private JButton pannello = new JButton(new ImageIcon("res/etc/pannello.png"));
 	private AudioInputStream input;
 	private Clip c;
 	private AudioInputStream input2;
@@ -39,6 +42,12 @@ public class GUI extends JFrame implements ActionListener {
 		setContentPane(new JLabel(sfondo));
 		setVisible(true);
 		setResizable(false);
+		testo.setBounds(0, 490, sfondo.getIconWidth(), 90);
+		testo.setForeground(Color.white);
+		testo.setFont(testo.getFont().deriveFont(30f));
+		testo.setHorizontalAlignment(SwingConstants.CENTER);
+		testo.setVisible(false);
+		add(testo);
 		// La finestra ha le dimensioni della larghezza e dell'altezza
 		// dell'immagine di sfondo.
 		setBounds(0, 0, sfondo.getIconWidth(), sfondo.getIconHeight());
@@ -55,17 +64,43 @@ public class GUI extends JFrame implements ActionListener {
 		inizia.setContentAreaFilled(false);
 		inizia.setCursor(cur);
 		add(inizia);
+		pannello.setBounds(253, 16, 394, 94);
+		pannello.setBackground(Color.black);
+		pannello.setBorder(null);
+		pannello.setOpaque(false);
+		pannello.setFocusable(false);
+		pannello.addActionListener(this);
+		pannello.setContentAreaFilled(false);
+		pannello.setCursor(cur);
+		add(pannello);
 		cont = 0;
-	}
-	public void actionPerformed(ActionEvent arg0) {
-		rimuoviSuono();
-		if (arg0.getSource().equals(inizia)) {
-			carica = new Carica(this);
-			t.schedule(carica, 0);
-			
+		if (domande.size() == 0) {
+			inizia.setVisible(false);
+			testo.setText("<html><body align='center'>Nessuna domanda inserita.<br>Utilizza il pannello di controllo "
+					+ "per aggiungere delle domande.</body></html>");
+			testo.setVisible(true);
 		}
 	}
-	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource().equals(inizia)) {
+				rimuoviSuono();
+				inizia.setVisible(false);
+				testo.setText("Caricamento...");
+				testo.setVisible(true);
+				carica = new Carica(this);
+				t.schedule(carica, 0);
+		}
+		if (arg0.getSource().equals(pannello)) {
+			try {
+				ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c","cd QCP && java -jar pannello.jar");
+				Process process = builder.start();			
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.exit(0);
+		}
+	}
+
 	public void nuovaDomanda() {
 		rimuoviSuono();
 		if (cont >= 0 && cont < 3) {
