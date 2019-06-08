@@ -19,12 +19,13 @@ public class Main {
 		int daLasciare;
 		int i;
 		File fileDir = new File("domandeRisposte.txt");
-		
+		boolean almenoUna = false;
 		BufferedReader in;
 		try {
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(fileDir), "UTF8"));
 			temp = in.readLine();
 		    while (temp != null) {
+		    	almenoUna = true;
 		    	domanda = temp;
 		    	risposte = new Vector<String>();
 		    	for (i=0; i<4; i++) {
@@ -37,6 +38,9 @@ public class Main {
 		    }
 		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
+		}
+		if (!almenoUna) {
+			g.nascondiTasti();
 		}
 	}
 

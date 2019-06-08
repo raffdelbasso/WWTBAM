@@ -74,12 +74,13 @@ public class GUI extends JFrame implements ActionListener {
 		pannello.setCursor(cur);
 		add(pannello);
 		cont = 0;
-		if (domande.size() == 0) {
-			inizia.setVisible(false);
-			testo.setText("<html><body align='center'>Nessuna domanda inserita.<br>Utilizza il pannello di controllo "
-					+ "per aggiungere delle domande.</body></html>");
-			testo.setVisible(true);
-		}
+	}
+	
+	public void nascondiTasti() {
+		inizia.setVisible(false);
+		testo.setText("<html><body align='center'>Nessuna domanda inserita.<br>Utilizza il pannello di controllo "
+				+ "per aggiungere delle domande.</body></html>");
+		testo.setVisible(true);
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource().equals(inizia)) {
