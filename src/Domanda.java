@@ -33,7 +33,7 @@ public class Domanda extends Container implements ActionListener {
 		int i;
 		this.g = g;
 		this.domanda = new JLabel();
-		this.domanda.setBounds(109, 327, 693, 76);
+		this.domanda.setBounds(50, 317, 800, 100);
 		this.domanda.setHorizontalAlignment(SwingConstants.CENTER);
 		this.domanda.setForeground(Color.white);
 		this.domanda.setFont(this.domanda.getFont().deriveFont(24f));

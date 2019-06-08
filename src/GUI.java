@@ -138,6 +138,5 @@ public class GUI extends JFrame implements ActionListener {
 		this.risposte.add(risposte);
 		corrette.add(corretta);
 		this.daLasciare.add(daLasciare);
-		System.out.println(this.risposte.elementAt(0).elementAt(2));
 	}
 }
