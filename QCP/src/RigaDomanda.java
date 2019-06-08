@@ -19,25 +19,25 @@ public class RigaDomanda extends JLabel implements ActionListener {
 	private Font f = new Font(Font.DIALOG, Font.BOLD, 16);
 	private GUI g;
 	private int cont;
-	private Domanda d;
 	public RigaDomanda(GUI g, Vector<Domanda> domande, Domanda d, int cont) {
 		this.g = g;
-		this.d = d;
 		this.cont = cont;
 		this.domande = domande;
 		this.domanda = new JLabel((cont+1)+". "+d.getDomanda());
 		this.domanda.setBounds(7, 9, 210, 20);
 		this.domanda.setForeground(Color.BLACK);
 		this.domanda.setFont(f);
-		scambia.setBounds(219, 5, 25, 27);
-		scambia.setBackground(Color.black);
-		scambia.setBorder(null);
-		scambia.setOpaque(false);
-		scambia.setFocusable(false);
-		scambia.addActionListener(this);
-		scambia.setContentAreaFilled(false);
-		scambia.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		add(scambia);
+		if (domande.size()>1) {
+			scambia.setBounds(219, 5, 25, 27);
+			scambia.setBackground(Color.black);
+			scambia.setBorder(null);
+			scambia.setOpaque(false);
+			scambia.setFocusable(false);
+			scambia.addActionListener(this);
+			scambia.setContentAreaFilled(false);
+			scambia.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			add(scambia);
+		}
 		modifica.setBounds(248, 5, 24, 26);
 		modifica.setBackground(Color.black);
 		modifica.setBorder(null);
