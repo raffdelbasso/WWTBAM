@@ -93,7 +93,7 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		if (arg0.getSource().equals(pannello)) {
 			try {
-				ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c","cd QCP && java -jar pannello.jar");
+				ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c","cd QCP && pannello.jar");
 				Process process = builder.start();			
 			} catch (IOException e) {
 				e.printStackTrace();
